@@ -1,0 +1,11 @@
+version: 2
+updates:
+  # Moves the plugin submodules to their latest commit on main.
+  - package-ecosystem: gitsubmodule
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
