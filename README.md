@@ -11,7 +11,7 @@ https://max-dev42.github.io/stash-plugins/index.yml
 
 | Plugin | Repository |
 |---|---|
-| Performer Network | coming soon |
+| Performer Network | [max-dev42/stash-performer-network](https://github.com/max-dev42/stash-performer-network) |
 
 ## How it works
 
