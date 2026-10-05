@@ -1,3 +1,6 @@
 [submodule "plugins/stash-performer-network"]
 	path = plugins/stash-performer-network
 	url = https://github.com/max-dev42/stash-performer-network.git
+[submodule "plugins/stash-shorts"]
+	path = plugins/stash-shorts
+	url = https://github.com/max-dev42/stash-shorts.git
