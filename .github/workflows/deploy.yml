@@ -1,8 +1,10 @@
 name: Build and deploy plugin source
 
+# Two sources on one site: main is the stable source (index.yml at the root), beta the beta source
+# (beta/index.yml), each with its own submodule commits. A push to either branch builds both.
 on:
   push:
-    branches: [main]
+    branches: [main, beta]
   workflow_dispatch:
 
 permissions:
@@ -20,10 +22,22 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
+          ref: main
           submodules: recursive
           fetch-depth: 0
       - run: pip install pyyaml
-      - run: TZ=UTC0 python3 build_site.py _site
+      - name: Stable source from main
+        run: TZ=UTC0 python3 build_site.py _site
+      - name: Beta source from beta, if the branch exists
+        run: |
+          if git ls-remote --exit-code --heads origin beta > /dev/null; then
+            git fetch --no-tags origin +refs/heads/beta:refs/remotes/origin/beta
+            git worktree add --detach "$RUNNER_TEMP/beta" origin/beta
+            git -C "$RUNNER_TEMP/beta" submodule update --init --recursive
+            (cd "$RUNNER_TEMP/beta" && TZ=UTC0 python3 build_site.py "$GITHUB_WORKSPACE/_site/beta")
+          else
+            echo "no beta branch: stable source only"
+          fi
       - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
