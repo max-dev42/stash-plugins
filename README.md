@@ -12,6 +12,7 @@ https://max-dev42.github.io/stash-plugins/index.yml
 | Plugin | Repository |
 |---|---|
 | Performer Network | [max-dev42/stash-performer-network](https://github.com/max-dev42/stash-performer-network) |
+| Stash Shorts | [max-dev42/stash-shorts](https://github.com/max-dev42/stash-shorts) |
 
 ## Beta source
 
